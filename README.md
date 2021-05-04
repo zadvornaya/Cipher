@@ -17,7 +17,7 @@ pip install -r requirements.txt
 
 ### Указать основной файл:
 ```
-set FLASK_APP=chess.py
+set FLASK_APP=cipher.py
 ```
 
 ### Оживить БД:
