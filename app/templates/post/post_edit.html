@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block app_content %}
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Изменить пост</h2>
+        </div>
+    </div>
+    <hr>
+    <form action="{{ url_for('post.edit', id=post.id) }}" method="post" class="form" role="form" id="boardForm" name="boardForm">
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <div class="form-group col-md-6">
+                {{ form.id }}
+                {{ wtf.form_field(form.name, id='name') }}
+                {{ wtf.form_field(form.text, id='text') }}
+                {{ wtf.form_field(form.submit, class='btn btn-primary') }}
+            </div>
+        </div>
+    </form>
+{% endblock %}

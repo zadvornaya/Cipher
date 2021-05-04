@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <h1>Регистрация</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <form action="{{ url_for('auth.registration') }}" method="post" class="form" role="form">
+                {{ form.hidden_tag() }}
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ wtf.form_field(form.username) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ wtf.form_field(form.email) }}
+                    </div>
+                </div>
+                {{ wtf.form_field(form.first_name) }}
+                {{ wtf.form_field(form.last_name) }}
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ wtf.form_field(form.password) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ wtf.form_field(form.password_check) }}
+                    </div>
+                </div>
+                {{ wtf.form_field(form.role) }}
+                <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Назад</a>
+                {{ wtf.form_field(form.submit, class='btn btn-success') }}
+            </form>
+        </div>
+    </div>
+{% endblock %}

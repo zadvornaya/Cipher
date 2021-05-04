@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h2>Список всех постов</h2>
+    {% if posts %}
+        {% for postrow in posts | batch(3) %}
+            <div class="row">
+                {%- for post in postrow %}
+                    <div class="col-md-4">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading clearfix">
+                                <h3 class="panel-title pull-left">{{ post.name }}</h3>
+                                {% if role == post.level %}
+                                    <a class="btn btn-sm mr-2 btn-danger pull-right" href="{{ url_for('post.delete', id=post.id) }}">Удалить</a>
+                                    <a class="btn btn-sm mr-2 btn-success pull-right" href="{{ url_for('post.edit', id=post.id) }}">Редактировать</a>
+                                {% endif %}
+                            </div>
+                            <div class="panel-body">
+                                <div id="text_{{ post.id }}">{{ post.text }}</div>
+                            </div>
+                        </div>
+                    </div>
+                {%- endfor %}
+            </div>
+        {% endfor %}
+        <nav>
+            <ul class="pager">
+                <li class="previous{% if not prev_url %} disabled{% endif %}">
+                    <a href="{{ prev_url or '#' }}">
+                        <span aria-hidden="true">&larr;</span> Новые
+                    </a>
+                </li>
+                <li class="next{% if not next_url %} disabled{% endif %} ">
+                    <a href="{{ next_url or '#' }}">
+                        Старые<span aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    {% else %}
+        <h4>Ещё не создано ни одного поста :(</h4>
+        <a href="{{ url_for('post.create') }}" class="btn btn-primary">Создать сейчас!</a>
+    {% endif %}
+{% endblock %}
